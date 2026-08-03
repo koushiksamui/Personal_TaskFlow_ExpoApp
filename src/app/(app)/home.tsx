@@ -4,11 +4,15 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "@/hooks/useAuth";
 
-import Button from "../components/Button";
-import { Colors } from "../constants/colors";
+import Button from "../../components/ui/Button";
+import { Colors } from "../../constants/colors";
+import { router } from "expo-router";
 
 export default function Home() {
+  const { user, logout } = useAuth();
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -16,18 +20,18 @@ export default function Home() {
         <Text style={styles.logo}>📋</Text>
 
         <Text style={styles.title}>
-          TaskFlow
+          Welcome, {user?.name || "User"}!
         </Text>
 
         <Text style={styles.subtitle}>
-          Organize your work effortlessly.
+          {user?.email || "Organize your work effortlessly."}
         </Text>
 
       </View>
 
       <Button
-        title="Get Started"
-        onPress={() => {}}
+        title="Logout"
+        onPress={logout}
       />
     </SafeAreaView>
   );
